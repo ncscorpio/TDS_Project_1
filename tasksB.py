@@ -21,10 +21,10 @@ def B3(url, save_path):
         file.write(response.text)
 
 # B4: Clone a Git Repo and Make a Commit
-# def clone_git_repo(repo_url, commit_message):
-#     import subprocess
-#     subprocess.run(["git", "clone", repo_url, "/data/repo"])
-#     subprocess.run(["git", "-C", "/data/repo", "commit", "-m", commit_message])
+def clone_git_repo(repo_url, commit_message):
+    import subprocess
+    subprocess.run(["git", "clone", repo_url, "/data/repo"])
+    subprocess.run(["git", "-C", "/data/repo", "commit", "-m", commit_message])
 
 # B5: Run SQL Query
 def B5(db_path, query, output_filename):
@@ -60,12 +60,12 @@ def B7(image_path, output_path, resize=None):
     img.save(output_path)
 
 # B8: Audio Transcription
-# def B8(audio_path):
-#     import openai
-#     if not B12(audio_path):
-#         return None
-#     with open(audio_path, 'rb') as audio_file:
-#         return openai.Audio.transcribe("whisper-1", audio_file)
+def B8(audio_path):
+    import openai
+    if not B12(audio_path):
+        return None
+    with open(audio_path, 'rb') as audio_file:
+        return openai.Audio.transcribe("whisper-1", audio_file)
 
 # B9: Markdown to HTML Conversion
 def B9(md_path, output_path):
@@ -80,14 +80,14 @@ def B9(md_path, output_path):
         file.write(html)
 
 # B10: API Endpoint for CSV Filtering
-# from flask import Flask, request, jsonify
-# app = Flask(__name__)
-# @app.route('/filter_csv', methods=['POST'])
-# def filter_csv():
-#     import pandas as pd
-#     data = request.json
-#     csv_path, filter_column, filter_value = data['csv_path'], data['filter_column'], data['filter_value']
-#     B12(csv_path)
-#     df = pd.read_csv(csv_path)
-#     filtered = df[df[filter_column] == filter_value]
-#     return jsonify(filtered.to_dict(orient='records'))
+from flask import Flask, request, jsonify
+app = Flask(__name__)
+@app.route('/filter_csv', methods=['POST'])
+def filter_csv():
+    import pandas as pd
+    data = request.json
+    csv_path, filter_column, filter_value = data['csv_path'], data['filter_column'], data['filter_value']
+    B12(csv_path)
+    df = pd.read_csv(csv_path)
+    filtered = df[df[filter_column] == filter_value]
+    return jsonify(filtered.to_dict(orient='records'))
